@@ -1,0 +1,30 @@
+h1 Listing parties
+- if @parties.empty?
+  h2 No Party yet.
+- else
+
+  table
+    tr
+      th Body
+      th Date
+      th Starttime
+      th Endtime
+      th Place
+      th
+      th
+      th
+
+    - @parties.each do |party|
+      tr
+        td = party.body
+        td = party.date
+        td = party.starttime
+        td = party.endtime
+        td = party.place
+        td = link_to 'Show', resource_url
+        td = link_to 'Edit', edit_resource_url(party)
+        td = link_to 'Destroy', resource_path(party), :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Party', new_group_party_path(@group)

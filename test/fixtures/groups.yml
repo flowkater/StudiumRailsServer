@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  goal: MyString
+  subject: MyString
+  place: MyString
+  people: 1
+  name: MyString
+  rule: MyString
+  introduce: MyText
+
+two:
+  goal: MyString
+  subject: MyString
+  place: MyString
+  people: 1
+  name: MyString
+  rule: MyString
+  introduce: MyText

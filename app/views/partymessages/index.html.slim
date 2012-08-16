@@ -1,0 +1,24 @@
+h1 Listing partymessages
+- if @partymessages.empty?
+  h2 No Partymessages yet.
+
+- else
+  table
+    tr
+      th Body
+      th Group
+      th
+      th
+      th
+
+    - @partymessages.each do |partymessage|
+      tr
+        td = partymessage.body
+        td = partymessage.group.name
+        td = link_to 'Edit', edit_resource_url(partymessage)
+        td = link_to 'Destroy', resource_path(partymessage), :confirm => 'Are you sure?', :method => :delete
+
+br
+p
+  = link_to 'New Partymessage', new_group_partymessage_path(@group)
+

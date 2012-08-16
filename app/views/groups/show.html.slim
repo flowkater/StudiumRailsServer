@@ -1,0 +1,37 @@
+p#notice = notice
+
+p
+  strong Goal:
+  = @group.goal
+p
+  strong Subject:
+  = @group.subject
+p
+  strong Place:
+  = @group.place
+p
+  strong People:
+  = @group.people
+p
+  strong Name:
+  = @group.name
+p
+  strong Rule:
+  = @group.rule
+p
+  strong Introduce:
+  = @group.introduce
+
+= link_to '모집메시지', group_partymessages_path(@group)
+br
+br
+= link_to '모임', group_parties_path(@group)
+br
+br
+= link_to '포스트 보기', group_posts_path(@group)
+
+br
+
+= link_to 'Edit', edit_group_path(@group)
+'|
+= link_to 'Back', groups_path

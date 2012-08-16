@@ -1,0 +1,19 @@
+p#notice = notice
+
+p
+  strong Body:
+  = @post.body
+p
+  strong Type:
+  = @post.posttype
+p
+  strong Group:
+  = @post.group.name
+br
+br
+= link_to '댓글 보러가기', group_post_comments_path(@group, @post)
+br
+br
+= link_to 'Edit', edit_resource_url(@post)
+'|
+= link_to 'Back', group_posts_path(@group)

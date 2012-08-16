@@ -1,0 +1,10 @@
+h1 New comment
+
+= form_for [@group, @post, @comment] do |f|
+	.field
+		= f.label :body
+		= f.text_field :body
+	.actions = f.submit 'Save'
+
+= link_to 'Back', group_post_comments_path(@group, @post)	
+

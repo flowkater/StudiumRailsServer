@@ -1,0 +1,12 @@
+h1 New post
+
+= form_for [@group, @post] do |f|
+	.field
+		= f.label :body
+		= f.text_area :body
+	.field
+		= f.label :type
+		= f.number_field :type
+	.actions = f.submit 'Save'
+	
+= link_to 'Back', group_posts_path(@group)
