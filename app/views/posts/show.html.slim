@@ -9,6 +9,10 @@ p
 p
   strong Group:
   = @post.group.name
+p
+	strong Image:
+	- @post.pictures.each do |picture|
+		= image_tag picture.image_url(:thumb)
 br
 br
 = link_to '댓글 보러가기', group_post_comments_path(@group, @post)

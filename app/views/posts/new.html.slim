@@ -5,8 +5,13 @@ h1 New post
 		= f.label :body
 		= f.text_area :body
 	.field
-		= f.label :type
-		= f.number_field :type
+		= f.label :posttype
+		= f.number_field :posttype
+	.field
+		= f.fields_for :pictures do |picture|
+			.fieldset
+				= picture.file_field :image
+				
 	.actions = f.submit 'Save'
 	
 = link_to 'Back', group_posts_path(@group)

@@ -5,7 +5,6 @@
       ul
         - @post.errors.full_messages.each do |message|
           li = message
-
   .field
     = f.label :body
     = f.text_area :body

@@ -1,5 +1,5 @@
 json.groups @groups do |json, group|
-	json.(group, :id, :name, :introduce)
+	json.(group, :name, :goal)
 end
 
 

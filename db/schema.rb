@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816115138) do
+ActiveRecord::Schema.define(:version => 20120823104007) do
 
   create_table "comments", :force => true do |t|
     t.string   "body"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(:version => 20120816115138) do
   end
 
   add_index "partymessages", ["group_id"], :name => "index_partymessages_on_group_id"
+
+  create_table "pictures", :force => true do |t|
+    t.string   "image"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "pictures", ["imageable_id", "imageable_type"], :name => "index_pictures_on_imageable_id_and_imageable_type"
 
   create_table "posts", :force => true do |t|
     t.text     "body"

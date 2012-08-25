@@ -6,4 +6,10 @@ class PostsController < InheritedResources::Base
 	def create
 		create!{ collection_url }
 	end
+
+	def new
+		@post = Post.new
+		@post.pictures.build
+		new!
+	end
 end

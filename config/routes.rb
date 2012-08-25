@@ -1,6 +1,11 @@
 Studium::Application.routes.draw do
   
+  resources :pictures
+
   resources :groups do
+    collection do
+      get 'partym'
+    end
     resources :partymessages
     resources :parties
     resources :posts do

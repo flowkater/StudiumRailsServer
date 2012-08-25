@@ -12,6 +12,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'thin'
 gem 'kaminari'
+gem 'rmagick'
 gem 'carrierwave'
 
 # Gems used only for assets and not required

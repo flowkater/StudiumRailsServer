@@ -1,10 +1,4 @@
 = form_for @group do |f|
-  - if @group.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      ul
-        - @group.errors.full_messages.each do |message|
-          li = message
   h2 Step 1 필수
   .field
     = f.label :goal
@@ -28,4 +22,9 @@
   .field
     = f.label :introduce
     = f.text_area :introduce
+  .field
+    = f.fields_for :pictures do |picture|
+      .fieldset
+        = picture.file_field :image
+
   .actions = f.submit 'Save'

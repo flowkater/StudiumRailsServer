@@ -21,6 +21,10 @@ p
 p
   strong Introduce:
   = @group.introduce
+p
+  strong Image:
+  - @group.pictures.each do |picture|
+    = image_tag picture.image_url(:thumb)
 
 = link_to '모집메시지', group_partymessages_path(@group)
 br

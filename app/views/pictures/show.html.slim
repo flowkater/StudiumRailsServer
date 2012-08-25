@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Image:
+  = @picture.image
+p
+  strong Imageable:
+  = @picture.imageable_id
+p
+  strong String:
+  = @picture.string
+
+= link_to 'Edit', edit_picture_path(@picture)
+'|
+= link_to 'Back', pictures_path
