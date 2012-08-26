@@ -14,8 +14,8 @@ table
     th Place
     th People
     th Name
-    th Rule
     th Introduce
+    th Founder
     th
     th
     th
@@ -27,8 +27,8 @@ table
       td = group.place
       td = group.people
       td = group.name
-      td = group.rule
       td = group.introduce
+      td = group.founders.first
       td = link_to 'Show', group
       td = link_to 'Edit', edit_group_path(group)
       td = link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete

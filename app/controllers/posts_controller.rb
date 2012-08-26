@@ -4,6 +4,8 @@ class PostsController < InheritedResources::Base
 	action :all
 
 	def create
+		@post = current_user.posts.build(params[:post])
+		@post.group_id = params[:group_id]
 		create!{ collection_url }
 	end
 
@@ -11,5 +13,11 @@ class PostsController < InheritedResources::Base
 		@post = Post.new
 		@post.pictures.build
 		new!
+	end
+
+	protected
+
+	def begin_of_association_chain
+		current_user
 	end
 end

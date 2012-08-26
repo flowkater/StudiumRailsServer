@@ -1,0 +1,28 @@
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+
+  # model
+  has_many :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
+  has_many :posts
+  has_many :comments
+
+  def member?(group)
+  	memberships.find_by_group_id(group)
+  end
+
+  def join!(group)
+  	memberships.create!(group_id: group.id)
+  end
+
+  def leave!(group)
+  	memberships.find_by_group_id(group).destroy
+  end
+end

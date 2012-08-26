@@ -6,7 +6,7 @@ class CreateGroups < ActiveRecord::Migration
       t.string :place
       t.integer :people
       t.string :name
-      t.string :rule
+      t.boolean :recruit, default: false
       t.text :introduce
 
       t.timestamps

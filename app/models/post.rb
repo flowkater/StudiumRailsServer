@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :group
+  belongs_to :user
   default_scope order: 'updated_at DESC'
   has_many :comments
   has_many :pictures, as: :imageable, dependent: :destroy

@@ -15,7 +15,7 @@ p
 		= image_tag picture.image_url(:thumb)
 br
 br
-= link_to '댓글 보러가기', group_post_comments_path(@group, @post)
+= link_to '댓글 보러가기', post_comments_path(@post)
 br
 br
 = link_to 'Edit', edit_resource_url(@post)

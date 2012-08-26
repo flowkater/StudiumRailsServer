@@ -1,4 +1,6 @@
-
+json.posts @groups do |json, group|
+	# json
+end
 
 # json.(@store, :id, :name, :address, :introduce)
 # json.posts @store.posts do |json, post|

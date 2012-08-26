@@ -5,6 +5,7 @@ table
     th Body
     th Type
     th Group
+    th User
     th
     th
     th
@@ -14,6 +15,7 @@ table
       td = post.body
       td = post.posttype
       td = post.group.name
+      td = post.user
       td = link_to 'Show', resource_url(post)
       td = link_to 'Edit', edit_resource_url(post)
       td = link_to 'Destroy', resource_path(post), :confirm => 'Are you sure?', :method => :delete

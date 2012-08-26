@@ -1,5 +1,7 @@
 Studium::Application.routes.draw do
   
+  devise_for :users
+
   resources :pictures
 
   resources :groups do
@@ -8,10 +10,14 @@ Studium::Application.routes.draw do
     end
     resources :partymessages
     resources :parties
-    resources :posts do
-      resources :comments
-    end
+    resources :posts
   end
+
+  resources :posts do
+    resources :comments
+  end
+
+  resources :memberhips, only: [:create, :destroy]
 
   root :to => 'groups#index'
 
