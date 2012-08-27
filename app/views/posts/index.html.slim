@@ -15,7 +15,7 @@ table
       td = post.body
       td = post.posttype
       td = post.group.name
-      td = post.user
+      td = post.user.email
       td = link_to 'Show', resource_url(post)
       td = link_to 'Edit', edit_resource_url(post)
       td = link_to 'Destroy', resource_path(post), :confirm => 'Are you sure?', :method => :delete

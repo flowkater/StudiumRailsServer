@@ -6,5 +6,5 @@ h1 New comment
 		= f.text_field :body
 	.actions = f.submit 'Save'
 
-= link_to 'Back', group_post_comments_path(@group, @post)	
+= link_to 'Back', post_comments_path(@post)	
 

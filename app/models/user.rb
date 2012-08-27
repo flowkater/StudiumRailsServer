@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
   # model
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  mount_uploader :avatar, AvatarUploader
 
   def member?(group)
   	memberships.find_by_group_id(group)

@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :pictures, as: :imageable, dependent: :destroy
 
-  # attr_accessible :body, :posttype, :pictures
+  attr_accessible :body, :posttype, :pictures
 
   # nested picture
   accepts_nested_attributes_for :pictures

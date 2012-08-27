@@ -4,6 +4,7 @@ table
   tr
     th Body
     th Post
+    th User
     th
     th
     th
@@ -12,6 +13,7 @@ table
     tr
       td = comment.body
       td = comment.post.id
+      td = comment.user.email
       td = link_to 'Show', resource_url(comment)
       td = link_to 'Edit', edit_resource_url(comment)
       td = link_to 'Destroy', resource_path(comment), :confirm => 'Are you sure?', :method => :delete
