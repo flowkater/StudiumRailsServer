@@ -34,6 +34,7 @@ group :development do
 end
 
 group :production do
+	gem 'mysql2'
 end
 
 gem 'jquery-rails'
@@ -50,6 +51,8 @@ gem 'ransack'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'unicorn'

@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(:version => 20120825171540) do
     t.string   "place"
     t.integer  "people"
     t.string   "name"
-    t.boolean  "recruit",    :default => false
+    t.boolean  "recruit",    :default => true
     t.text     "introduce"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "memberships", :force => true do |t|
