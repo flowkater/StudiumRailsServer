@@ -4,7 +4,7 @@ set :application, "StudiumRailsServer" # Your application location on your serve
 
 default_run_options[:pty] = true
 
-set :repository,  "."
+set :repository,  "git@github.com:ChoJaewoo/StudiumRailsServer.git"
 set :scm, :none
 set :deploy_via, :copy
 
@@ -16,9 +16,10 @@ set :use_sudo, false
 set :applicationdir, "/home/#{user}/#{application}"
 set :deploy_to, applicationdir
 
-# role :web, domain                 
-# role :app, domain                          
-# role :db,  domain, :primary => true 
+role :web, application                
+role :app, application                          
+role :db,  application, :primary => true 
+set :port, 2222
 
 
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
