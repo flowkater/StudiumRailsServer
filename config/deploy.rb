@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 
-set :application, "14.63.222.63" # Your application location on your server goes here
+set :application, "StudiumRailsServer" # Your application location on your server goes here
 
 default_run_options[:pty] = true
 
