@@ -1,7 +1,9 @@
 json.(@group, :id, :name, :created_at, :subject, :goal)
-
+if @group.pictures.first
+	json.image @group.pictures.first.image_url(:thumb)
+end
 json.users @group.users do |json, user|
-	json.member_name user.email
+	json.name user.email
 end
 
 # json.(@store, :id, :name, :address, :introduce)

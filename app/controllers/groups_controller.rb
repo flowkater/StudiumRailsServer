@@ -1,6 +1,6 @@
 class GroupsController < InheritedResources::Base
 	respond_to :html, :json
-	before_filter :authenticate_user!
+	# before_filter :authenticate_user!
 
 	def create
 		@group = current_user.groups.create!(params[:group])
@@ -13,7 +13,6 @@ class GroupsController < InheritedResources::Base
 		@group.pictures.build
 		new!
 	end
-
 
 	def partym
 		@search = Group.search(params[:q])
