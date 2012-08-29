@@ -1,6 +1,6 @@
-re 'bundler/capistrano'
+require 'bundler/capistrano'
 
-set :application, "" # Your application location on your server goes here
+set :application, "14.63.222.63" # Your application location on your server goes here
 
 default_run_options[:pty] = true
 
@@ -12,13 +12,13 @@ set :checkout, 'export'
 
 set :user, 'kater102' # Your username goes here
 set :use_sudo, false
-set :domain, 'tweetni.com' # Your domain goes here
+# set :domain, 'tweetni.com' # Your domain goes here
 set :applicationdir, "/home/#{user}/#{application}"
 set :deploy_to, applicationdir
 
-role :web, domain                 
-role :app, domain                          
-role :db,  domain, :primary => true 
+# role :web, domain                 
+# role :app, domain                          
+# role :db,  domain, :primary => true 
 
 
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
