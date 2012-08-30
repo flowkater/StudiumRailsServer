@@ -1,9 +1,10 @@
 json.(@group, :name, :goal)
 
 json.posts @posts do |json, post|
+	json.group_id post.group.id
 	json.(post, :id,:body, :posttype)
 	json.time post.updated_at.strftime("%m/%d %p %I:%M")
-	json.name post.user.email
+	json.name post.user.name
 	json.comment_count post.comments.size.to_s
 	if post.pictures.first
 		json.content_image post.pictures.first.image_url(:thumb)

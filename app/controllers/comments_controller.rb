@@ -10,6 +10,10 @@ class CommentsController < InheritedResources::Base
 
 	protected
 
+	def collection
+		@comments ||= end_of_association_chain.page params[:page]
+	end
+
 	def begin_of_association_chain
 		current_user
 	end

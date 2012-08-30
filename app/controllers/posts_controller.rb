@@ -15,6 +15,12 @@ class PostsController < InheritedResources::Base
 		new!
 	end
 
+	def show
+		@post = Post.find(params[:id])
+		@comments = @post.comments.page params[:page]
+	end
+
+
 	protected
 
 	def collection
