@@ -7,6 +7,7 @@ Studium::Application.routes.draw do
   resources :groups do
     collection do
       get 'partym'
+      get 'currentuser'
     end
     resources :partymessages
     resources :parties

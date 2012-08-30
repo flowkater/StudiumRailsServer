@@ -20,6 +20,10 @@ class GroupsController < InheritedResources::Base
 		@groups = @search.result.recruit.recently_partym.page params[:page]
 	end
 
+	def currentuser
+		@user = current_user	
+	end
+
 	protected
 
 	def collection
