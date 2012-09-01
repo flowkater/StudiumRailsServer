@@ -23,3 +23,15 @@
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
 
 <%= link_to "Back", :back %>
+
+<p>
+  <%= link_to "Generate Token", token_authentications_path(:user_id => current_user.id), :method => :post, :confirm => "Are you sure?" %>
+  <%= link_to "Delete Token", token_authentication_path(current_user), :method => :delete, :confirm => "Are you sure?"%>
+  <% if resource.authentication_token %>
+  <p>
+    You can user this url to login
+    <br/>
+    <%= link_to "http://localhost:3000#{root_path(:auth_token => resource.authentication_token)}", root_path(:auth_token => resource.authentication_token)%>
+  </p>
+  <% end %>
+</p>

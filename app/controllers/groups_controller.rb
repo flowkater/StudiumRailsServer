@@ -1,4 +1,5 @@
 class GroupsController < InheritedResources::Base
+	skip_before_filter :verify_authenticity_token
 	respond_to :html, :json
 	# before_filter :authenticate_user!
 
@@ -31,7 +32,4 @@ class GroupsController < InheritedResources::Base
 		@groups = @search.result.updated_groups.page params[:page]
 	end
 
-	def begin_of_association_chain
-		current_user
-	end
 end

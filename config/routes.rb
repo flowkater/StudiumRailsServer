@@ -1,6 +1,10 @@
 Studium::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers:{sessions:"sessions"}
+
+  devise_scope :user do
+    resources :sessions, only:[:create, :destroy]
+  end
 
   resources :pictures
 
@@ -18,7 +22,9 @@ Studium::Application.routes.draw do
     resources :comments
   end
 
-  resources :memberhips, only: [:create, :destroy]
+  resources :memberships, only: [:create, :destroy]
+
+  resources :token_authentications, only: [:create, :destroy]
 
   root :to => 'groups#index'
 

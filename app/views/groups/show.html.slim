@@ -30,7 +30,19 @@ br
 br
 br
 = link_to '포스트 보기', group_posts_path(@group)
-
+br
+br
+- if current_user.member?(@group.id)
+  = form_for current_user.memberships.find_by_group_id(@group), html:{method: :delete} do |f|
+    .actions
+      = f.submit "leave"
+- else
+  = form_for current_user.memberships.build(group_id: @group.id) do |f|
+    div
+      = f.hidden_field :group_id
+    .actions
+      = f.submit "Join"
+  
 br
 
 = link_to 'Edit', edit_group_path(@group)

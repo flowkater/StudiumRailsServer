@@ -3,10 +3,14 @@ if @group.pictures.first
 	json.image @group.pictures.first.image_url(:thumb)
 end
 json.users @group.users do |json, user|
-	if user.avatar
-		json.image user.avatar.url(:thumb)
+	unless @group.role_is?(user,"waiting")
+		if user.avatar
+			json.image user.avatar.url(:thumb)
+		end
+		json.name user.name
+	else
+		json.name ""
 	end
-	json.name user.name
 end
 
 # json.(@store, :id, :name, :address, :introduce)
