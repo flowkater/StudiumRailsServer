@@ -1,5 +1,7 @@
 Studium::Application.routes.draw do
   
+  resources :todolists
+
   devise_for :users, controllers:{sessions:"sessions"}
 
   devise_scope :user do

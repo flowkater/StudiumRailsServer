@@ -31,5 +31,4 @@ class GroupsController < InheritedResources::Base
 		@search = Group.search(params[:q])
 		@groups = @search.result.updated_groups.page params[:page]
 	end
-
 end

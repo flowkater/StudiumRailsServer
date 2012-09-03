@@ -1,0 +1,12 @@
+= form_for @todolist do |f|
+  - if @todolist.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@todolist.errors.count, "error")} prohibited this todolist from being saved:"
+      ul
+        - @todolist.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :list
+    = f.text_field :list
+  .actions = f.submit 'Save'
