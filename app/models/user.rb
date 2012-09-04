@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   	memberships.find_by_group_id(group)
   end
 
+  def role(group)
+    member?(group).current_state.name
+  end
+
   def join!(group)
   	memberships.create!(group_id: group.id)
   end

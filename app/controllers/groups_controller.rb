@@ -1,7 +1,7 @@
 class GroupsController < InheritedResources::Base
 	skip_before_filter :verify_authenticity_token
 	respond_to :html, :json
-	# before_filter :authenticate_user!
+	before_filter :authenticate_user!, only: [:create, :destroy]
 
 	def create
 		@group = current_user.groups.create!(params[:group])

@@ -28,6 +28,10 @@ class Group < ActiveRecord::Base
 		(membership_of(user).current_state.to_s == str) rescue false
 	end
 
+	def role(user)
+		(membership_of(user).current_state.to_s) rescue 'nomember'
+	end
+
 	# nested picture
 	accepts_nested_attributes_for :pictures
 end

@@ -1,7 +1,4 @@
 Studium::Application.routes.draw do
-  
-  resources :todolists
-
   devise_for :users, controllers:{sessions:"sessions"}
 
   devise_scope :user do
@@ -22,6 +19,10 @@ Studium::Application.routes.draw do
 
   resources :posts do
     resources :comments
+  end
+
+  resources :parties do
+    resources :todolists
   end
 
   resources :memberships, only: [:create, :destroy]
