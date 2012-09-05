@@ -4,6 +4,7 @@ h1 New partymessage
   .field
     = f.label :body
     = f.text_area :body
-  .actions = f.submit 'Save'
+  .actions 
+  	= f.submit 'Save'
 
 = link_to 'Back', group_partymessages_path(@group)

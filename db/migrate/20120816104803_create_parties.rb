@@ -6,6 +6,8 @@ class CreateParties < ActiveRecord::Migration
       t.time :starttime
       t.time :endtime
       t.string :place
+      t.string :attendrate
+      t.string :todorate
       t.references :group
 
       t.timestamps

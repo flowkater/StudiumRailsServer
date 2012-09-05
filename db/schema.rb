@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825171540) do
+ActiveRecord::Schema.define(:version => 20120901074305) do
 
   create_table "comments", :force => true do |t|
     t.string   "body"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20120825171540) do
     t.time     "starttime"
     t.time     "endtime"
     t.string   "place"
+    t.string   "attendrate"
+    t.string   "todorate"
     t.integer  "group_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -91,6 +93,13 @@ ActiveRecord::Schema.define(:version => 20120825171540) do
 
   add_index "posts", ["group_id"], :name => "index_posts_on_group_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "todolists", :force => true do |t|
+    t.string   "list"
+    t.integer  "party_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
