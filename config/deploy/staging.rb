@@ -1,1 +1,1 @@
-set :user, "stage"
+set :user, "root"

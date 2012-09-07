@@ -8,7 +8,7 @@
 # task :restart                       - Unicorn with preload_app should be reloaded by USR2+QUIT signals, not HUP
 #
 # http://unicorn.bogomips.org/SIGNALS.html
-# "If preload_app is true, then application code changes will have no effect; 
+# "If Âpreload_appÂ is true, then application code changes will have no effect; 
 # USR2 + QUIT (see below) must be used to load newer code in this case"
 # 
 # config/deploy.rb
@@ -26,14 +26,14 @@ set :repository,                 "git@github.com:ChoJaewoo/StudiumRailsServer.gi
 set :deploy_via,                 :remote_cache
 default_run_options[:pty]        = true
 
-set :application,                "app"
+set :application,                "14.63.222.63"
 set :use_sudo,                   false
-set :user,                       "app"
+set :user,                       "root"
 set :normalize_asset_timestamps, false
 
-role :app, "studiumrails"
-role :web, "studiumrails"
-role :db, "studiumrails", :primary => true
+role :app, "14.63.222.63"
+role :web, "14.63.222.63"
+role :db, "14.63.222.63", :primary => true
 
 # Optional
 before "deploy",                 "deploy:web:disable"
@@ -82,7 +82,6 @@ namespace :deploy do
       run "rm #{shared_path}/system/maintenance.html"
     end
   end
-
 end
 
 
