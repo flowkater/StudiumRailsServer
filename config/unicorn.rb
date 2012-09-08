@@ -1,7 +1,7 @@
-working_directory "/var/www/StudiumRailsServer/current"
+working_directory "/var/www/StudiumRailsServer"
 pid "/var/www/StudiumRailsServer/shared/pids/unicorn.pid"
-stderr_path "/var/www/StudiumRailsServer/shared/log/unicorn.log"
-stdout_path "/var/www/StudiumRailsServer/shared/log/unicorn.log"
+stderr_path "/var/www/StudiumRailsServer/log/unicorn.log"
+stdout_path "/var/www/StudiumRailsServer/log/unicorn.log"
 
 listen "/tmp/unicorn.todo.sock"
 worker_processes 2
