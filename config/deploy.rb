@@ -1,12 +1,5 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-
 # Load RVM's capistrano plugin.    
-require "rvm/capistrano"
-#require 'auto_html/capistrano'
-
-set :rvm_ruby_string, '1.9.3-p125@rails322'
-set :rvm_type, :user  # Don't use system-wide RVM
-
+require 'bundler/capistrano'
 
 default_run_options[:pty] = true
 set :application, "StudiumRailsServer"
@@ -22,6 +15,7 @@ set :scm, :git
 set :branch, "master"
 set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{application}"
+set :normalize_asset_timestamps, false
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
@@ -37,20 +31,20 @@ before "deploy:start", "deploy:db_migrate"
 
 namespace :deploy do
   task :bundle_gems do
-    run "cd #{deploy_to}/current && bundle install" 
+    run "cd #{deploy_to}/current && bundle" 
   end
 
   task :db_migrate do
-    run "cd #{deploy_to}/current && bundle exec rake db:migrate RAILS_ENV=production"
+    run "cd #{deploy_to}/current && rake db:migrate RAILS_ENV=production"
   end
 
   task :db_drop do
-    run "cd #{deploy_to}/current && bundle exec rake db:drop RAILS_ENV=production"
+    run "cd #{deploy_to}/current && rake db:drop RAILS_ENV=production"
   end
 
   task :start, :roles => :app, :except => { :no_release => true} do
-    run "cd #{deploy_to}/current && bundle exec rake assets:precompile RAILS_ENV=production"
-    run "cd #{deploy_to}/current && bundle exec unicorn -c #{deploy_to}/current/config/unicorn.rb -D -E production"
+    run "cd #{deploy_to}/current && rake assets:precompile RAILS_ENV=production"
+    run "cd #{deploy_to}/current && unicorn -c #{deploy_to}/current/config/unicorn.rb -D -E production"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true} do
