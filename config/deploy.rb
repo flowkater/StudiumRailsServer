@@ -1,96 +1,68 @@
-# Capistrano configuration
-# 
-# require 'new_relic/recipes'         - Newrelic notification about deployment
-# require 'capistrano/ext/multistage' - We use 2 deployment environment: staging and production.
-# set :deploy_via, :remote_cache      - fetch only latest changes during deployment
-# set :normalize_asset_timestamps     - no need to touch (date modification) every assets
-# "deploy:web:disable"                - traditional maintenance page (during DB migrations deployment)
-# task :restart                       - Unicorn with preload_app should be reloaded by USR2+QUIT signals, not HUP
-#
-# http://unicorn.bogomips.org/SIGNALS.html
-# "If Âpreload_appÂ is true, then application code changes will have no effect; 
-# USR2 + QUIT (see below) must be used to load newer code in this case"
-# 
-# config/deploy.rb
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+# Load RVM's capistrano plugin.    
+require "rvm/capistrano"
+#require 'auto_html/capistrano'
+
+set :rvm_ruby_string, '1.9.3-p125@rails322'
+set :rvm_type, :user  # Don't use system-wide RVM
 
 
-require 'bundler/capistrano'
-require 'capistrano/ext/multistage'
-require 'new_relic/recipes'
+default_run_options[:pty] = true
+set :application, "StudiumRailsServer"
+set :repository,  "git@github.com:ChoJaewoo/StudiumRailsServer.git"
 
-set :stages,                     %w(staging production)
-set :default_stage,              "staging"
+set :user, "root"
+set :use_sudo, false
+#set :scm_passphrase, "123123"
 
-set :scm,                        :git
-set :repository,                 "git@github.com:ChoJaewoo/StudiumRailsServer.git"
-set :deploy_via,                 :remote_cache
-default_run_options[:pty]        = true
+set :keep_releases, 5
 
-set :application,                "14.63.222.63"
-set :use_sudo,                   false
-set :user,                       "root"
-set :normalize_asset_timestamps, false
+set :scm, :git
+set :branch, "master"
+set :deploy_via, :remote_cache
+set :deploy_to, "/var/www/#{application}"
 
-role :app, "14.63.222.63"
-role :web, "14.63.222.63"
-role :db, "14.63.222.63", :primary => true
+# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-# Optional
-before "deploy",                 "deploy:web:disable"
-before "deploy:stop",            "deploy:web:disable"
+role :web, "14.63.222.63"                          # Your HTTP server, Apache/etc
+role :app, "14.63.222.63"                          # This may be the same as your `Web` server
+role :db,  "14.63.222.63", :primary => true # This is where Rails migrations will run
+#role :db,  "your slave db-server here"
 
-after  "deploy:update_code",     "deploy:symlink_shared"
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
-# Optional
-after  "deploy:start",           "deploy:web:enable"
-after  "deploy",                 "deploy:web:enable"
-
-after  "deploy",                 "deploy:cleanup"
-
+before "deploy:restart", "deploy:bundle_gems"
+before "deploy:start", "deploy:db_migrate"
 
 namespace :deploy do
-
-  %w[start stop].each do |command|
-    desc "#{command} unicorn server"
-    task command, :roles => :app, :except => { :no_release => true } do
-      run "#{current_path}/config/server/#{rails_env}/unicorn_init.sh #{command}"
-    end
+  task :bundle_gems do
+    run "cd #{deploy_to}/current && bundle install" 
   end
 
-  desc "restart unicorn server"
+  task :db_migrate do
+    run "cd #{deploy_to}/current && bundle exec rake db:migrate RAILS_ENV=production"
+  end
+
+  task :db_drop do
+    run "cd #{deploy_to}/current && bundle exec rake db:drop RAILS_ENV=production"
+  end
+
+  task :start, :roles => :app, :except => { :no_release => true} do
+    run "cd #{deploy_to}/current && bundle exec rake assets:precompile RAILS_ENV=production"
+    run "cd #{deploy_to}/current && bundle exec unicorn -c #{deploy_to}/current/config/unicorn.rb -D -E production"
+  end
+
+  task :stop, :roles => :app, :except => { :no_release => true} do
+    run "if [ -f #{unicorn_pid} ]; then kill `cat #{unicorn_pid}`; fi" 
+  end
+  
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "kill -s USR2 `cat #{unicorn_pid}`"
+  end
+
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{current_path}/config/server/#{rails_env}/unicorn_init.sh upgrade"
-  end
-
-
-  desc "Link in the production database.yml and assets"
-  task :symlink_shared do
-    run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
-  end
-
-
-  namespace :web do
-    desc "Maintenance start"
-    task :disable, :roles => :web do
-      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
-      page = File.read("public/503.html")
-      put page, "#{shared_path}/system/maintenance.html", :mode => 0644
-    end
-    
-    desc "Maintenance stop"
-    task :enable, :roles => :web do
-      run "rm #{shared_path}/system/maintenance.html"
-    end
-  end
-end
-
-
-namespace :log do
-  desc "A pinch of tail"
-  task :tailf, :roles => :app do
-    run "tail -n 10000 -f #{shared_path}/log/#{rails_env}.log" do |channel, stream, data|
-      puts "#{data}"
-      break if stream == :err
-    end
+    stop
+    start
   end
 end
