@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     member?(group).current_state.name
   end
 
+  def role_is?(group,str)
+    (member?(group).current_state.name == str) rescue false
+  end
+
   def join!(group)
   	memberships.create!(group_id: group.id)
   end

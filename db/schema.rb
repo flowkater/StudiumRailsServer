@@ -51,8 +51,7 @@ ActiveRecord::Schema.define(:version => 20120901074305) do
   create_table "parties", :force => true do |t|
     t.string   "body"
     t.date     "date"
-    t.time     "starttime"
-    t.time     "endtime"
+    t.string   "time"
     t.string   "place"
     t.string   "attendrate"
     t.string   "todorate"
