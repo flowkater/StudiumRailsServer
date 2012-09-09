@@ -1,5 +1,9 @@
 json.(@group, :name, :goal)
 
+json.partys @group.parties do |json, party|
+	json.(party, :id, :body, :date, :time, :place)
+end
+
 json.posts @posts do |json, post|
 	json.group_id post.group.id
 	json.(post, :id,:body, :posttype)
