@@ -1,4 +1,4 @@
-json.(@user, :id, :name)
+json.(@user, :id, :name, :gender, :phone, :email)
 
 if @user.avatar.url(:thumb)
 	json.image @user.avatar.url(:thumb)
