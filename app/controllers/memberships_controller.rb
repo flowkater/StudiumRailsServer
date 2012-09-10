@@ -7,6 +7,12 @@ class MembershipsController < ApplicationController
 		redirect_to @group
 	end
 
+	def accept
+		@membership = Membership.find_by_user_id(params[:user_id])
+		@membership.accept!
+		redirect_to status: 200		
+	end
+
 	def destroy
 		@group = Membership.find(params[:id]).group
 		current_user.leave!(@group.id)

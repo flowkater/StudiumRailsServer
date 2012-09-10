@@ -1,6 +1,5 @@
 class Membership < ActiveRecord::Base
 	include Workflow
-
 		attr_accessible :user_id, :group_id, :role
 		ROLES = %w(founder member waiting)
 

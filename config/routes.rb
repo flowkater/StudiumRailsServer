@@ -29,7 +29,11 @@ Studium::Application.routes.draw do
     resources :todolists
   end
 
-  resources :memberships, only: [:create, :destroy]
+  resources :memberships, only: [:create, :destroy] do
+    collection do
+      post 'accept'
+    end
+  end
 
   resources :token_authentications, only: [:create, :destroy]
 

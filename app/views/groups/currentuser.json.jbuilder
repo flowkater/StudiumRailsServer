@@ -8,6 +8,8 @@ json.groups @user.groups do |json, group|
 		json.role group.role(current_user)
 		if group.pictures.first
 			json.image group.pictures.first.image_url(:thumb)
+		else
+			json.image ""
 		end
 	end
 end
