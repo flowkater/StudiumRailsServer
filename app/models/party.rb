@@ -3,7 +3,7 @@ class Party < ActiveRecord::Base
 	default_scope order: 'date'
 	has_many :todolists, dependent: :destroy
 
-	attr_accessible :body, :date, :time, :place, :todolists_attributes
+	attr_accessible :body, :date, :time, :place, :todolists_attributes, :attendrate, :todorate
 	
 	# nested todolsits
 	accepts_nested_attributes_for :todolists, allow_destroy: :true
