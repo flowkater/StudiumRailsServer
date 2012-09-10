@@ -12,6 +12,10 @@ Studium::Application.routes.draw do
       get 'partym'
       get 'currentuser'
     end
+
+    member do
+      get 'founder'
+    end
     resources :partymessages
     resources :parties
     resources :posts

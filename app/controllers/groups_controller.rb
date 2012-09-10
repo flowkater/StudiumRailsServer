@@ -21,6 +21,11 @@ class GroupsController < InheritedResources::Base
 		@groups = @search.result.recruit.recently_partym.page params[:page]
 	end
 
+	def founder
+		@group = Group.find(params[:id])
+		@waiting_users = @group.waiting_users
+	end
+
 	def currentuser
 		@user = current_user	
 	end
