@@ -2,6 +2,17 @@ json.(@group, :name, :goal)
 
 json.partys @group.parties do |json, party|
 	json.(party, :id, :body, :date, :time, :place)
+	if party.attendrate
+		json.attendrate party.attendrate
+	else
+		json.attendrate "0"
+	end
+
+	if party.todorate
+		json.todorate party.todorate
+	else
+		json.todorate "0"
+	end
 end
 
 json.posts @posts do |json, post|
