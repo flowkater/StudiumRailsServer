@@ -1,5 +1,11 @@
 json.(@user, :id, :name)
-json.image @user.avatar.url(:thumb)
+
+if @user.avatar.url(:thumb)
+	json.image @user.avatar.url(:thumb)
+else
+	json.image ""
+end
+
 
 json.groups @user.groups do |json, group|
 	unless group.role_is?(current_user, "waiting")
@@ -8,8 +14,6 @@ json.groups @user.groups do |json, group|
 		json.role group.role(current_user)
 		if group.pictures.first
 			json.image group.pictures.first.image_url(:thumb)
-		else
-			json.image ""
 		end
 	end
 end
