@@ -8,7 +8,7 @@ class MembershipsController < ApplicationController
 	end
 
 	def accept
-		@membership = Membership.find_by_user_id(params[:user_id])
+		@membership = Membership.find_by_user_id(params[:membership][:user_id])
 		@membership.accept!
 		redirect_to status: 200		
 	end
@@ -18,4 +18,5 @@ class MembershipsController < ApplicationController
 		current_user.leave!(@group.id)
 		redirect_to @group
 	end
+
 end
