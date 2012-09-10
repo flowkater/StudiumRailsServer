@@ -8,7 +8,9 @@ class MembershipsController < ApplicationController
 	end
 
 	def accept
-		@membership = Membership.find_by_user_id(params[:membership][:user_id])
+		@user = User.find(params[:membership][:user_id])
+		@group = Group.find(params[:membership][:group_id])
+		@membership = @user.member?(@group)
 		@membership.accept!
 		redirect_to status: 200		
 	end
